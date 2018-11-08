@@ -4,12 +4,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: ["./src/index.tsx", "webpack-hot-middleware/client"]
+    app: ["./client/src/index.tsx", "webpack-hot-middleware/client"]
   },
 
   output: {
       filename: "[name].bundle.js",
-      path: __dirname + "/dist",
+      path: path.resolve(__dirname, "dist"),
       publicPath: '/'
   },
 
@@ -52,7 +52,10 @@ module.exports = {
           // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
           { 
             test: /\.tsx?$/, 
-            loader: "awesome-typescript-loader" 
+            loader: "awesome-typescript-loader" ,
+            options: {
+              configFileName: './client/tsconfig.json'
+            }
           },
 
           // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
@@ -66,7 +69,7 @@ module.exports = {
 
   plugins: [
       new HtmlWebpackPlugin({
-          template: 'src/index.html'
+          template: './client/src/index.html'
       }),
       new webpack.HotModuleReplacementPlugin()
   ],

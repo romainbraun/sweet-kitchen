@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 
 import App from './components/App/App';
 
-declare let module:any;
+declare let module: any;
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
