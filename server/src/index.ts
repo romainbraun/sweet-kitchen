@@ -1,9 +1,10 @@
 import express = require('express');
+import helmet from 'helmet';
 import path from 'path';
 import webpack, { Configuration } from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from '../webpack.config.js';
+import webpackConfig from './webpack.config.js';
 
 const app  = express(),
       port = process.env.PORT || 3030;
@@ -11,6 +12,8 @@ const app  = express(),
 const compiler = webpack(webpackConfig as Configuration);
 
 app.listen(port, () => { console.log(`App is listening on port ${port}`) });
+
+app.use(helmet());
 
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../../../client/dist', 'index.html'));
