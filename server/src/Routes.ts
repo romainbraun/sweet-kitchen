@@ -10,6 +10,10 @@ export default class Routes {
       res.sendFile(path.resolve(__dirname, '../../../client/dist', 'index.html'));
     });
 
+    // API
     app.get('/api/recipes', this.recipeController.getAllRecipes);
+    app.post('/api/recipes', this.recipeController.saveRecipe);
+
+    app.get('/api/recipes/:id', this.recipeController.getRecipe);
   }
 }

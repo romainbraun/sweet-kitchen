@@ -1,5 +1,6 @@
 import { json } from 'body-parser';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { IPost, Post } from '../Post/Post';
 
 interface IPostsState {
@@ -15,7 +16,6 @@ export default class Posts extends React.PureComponent<{}, IPostsState> {
       isLoading: false,
       recipes: [],
     };
-
   }
 
   public componentDidMount() {
@@ -32,8 +32,13 @@ export default class Posts extends React.PureComponent<{}, IPostsState> {
 
   private renderRecipes() {
     return this.state.recipes.map((recipe) => {
+      const link = `/post/${recipe._id}`;
       return (
-        <li><Post title={recipe.title}></Post></li>
+        <li key={recipe._id}>
+          <Link to={link}>
+            <Post post={recipe}></Post>
+          </Link>
+        </li>
       );
     });
   }
@@ -41,6 +46,7 @@ export default class Posts extends React.PureComponent<{}, IPostsState> {
   private mapPosts(response: []): IPost[] {
     return response.map((post: IPost) => {
       return {
+        _id: post._id,
         title: post.title,
       };
     });

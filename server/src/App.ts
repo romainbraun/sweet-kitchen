@@ -1,3 +1,4 @@
+import bodyParser = require('body-parser');
 import express from 'express';
 import helmet from 'helmet';
 import mongoose from 'mongoose';
@@ -36,5 +37,11 @@ export default class App {
     this.app.use(webpackHotMiddleware(compiler));
 
     this.app.use(express.static(path.resolve(__dirname, '../../../client/dist')));
+
+    this.app.use(bodyParser.json());
+
+    this.app.use(bodyParser.urlencoded({
+      extended: true,
+    }));
   }
 }
