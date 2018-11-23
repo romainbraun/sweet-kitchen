@@ -12,8 +12,9 @@ export default class Routes {
 
     // API
     app.get('/api/recipes', this.recipeController.getAllRecipes);
+    app.get('/api/recipes/:id', this.recipeController.getRecipe);
+
     app.post('/api/recipes', this.recipeController.saveRecipe);
 
-    app.get('/api/recipes/:id', this.recipeController.getRecipe);
   }
 }
