@@ -47,6 +47,9 @@ export default class Posts extends React.PureComponent<{}, IPostsState> {
     return response.map((post: IPost) => {
       return {
         _id: post._id,
+        content: post.content,
+        createdAt: post.createdAt,
+        keywords: post.keywords,
         title: post.title,
       };
     });
